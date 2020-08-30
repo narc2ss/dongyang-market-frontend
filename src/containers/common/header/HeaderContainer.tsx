@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Header from "components/common/header";
 import { inject, observer } from "mobx-react";
+
 import userStore from "store/user";
+import Header from "components/common/header";
 
 interface Props {
   userStore?: userStore;

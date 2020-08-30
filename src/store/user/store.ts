@@ -1,5 +1,6 @@
 import rootStore from "store";
 import { observable, flow, action, computed } from "mobx";
+
 import { UserType } from "./types";
 import userService from "service/user/userService";
 
@@ -25,11 +26,17 @@ class userStore {
   login = flow(function* (this: userStore, payload: any) {
     try {
       const res = yield userService.login(payload);
-      console.log(res.data);
       this.setUser(res.data);
     } catch (error) {
       throw error;
     }
+  });
+
+  check = flow(function* (this: userStore) {
+    try {
+      const res = yield userService.check();
+      console.log(res.data);
+    } catch (error) {}
   });
 }
 

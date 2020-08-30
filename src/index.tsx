@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "mobx-react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import { CookiesProvider } from "react-cookie";
 
 import App from "./App";
 import GlobalStyle from "style/globalStyle";
@@ -13,12 +14,14 @@ const stores = new rootStore();
 
 ReactDOM.render(
   <Router>
-    <Provider {...stores}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
-    </Provider>
+    <CookiesProvider>
+      <Provider {...stores}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </CookiesProvider>
   </Router>,
   document.getElementById("root")
 );
