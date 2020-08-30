@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import Login from "components/login/Login";
 import { inject, observer } from "mobx-react";
-import userStore from "store/user";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
-interface Props {
+import userStore from "store/user";
+import Login from "components/login/Login";
+
+interface Props extends RouteComponentProps {
   userStore?: userStore;
 }
 
@@ -15,6 +17,7 @@ class LoginContainer extends Component<Props> {
   onLogin = async (payload: any) => {
     try {
       await this.userStore.login(payload);
+      this.props.history.push("/");
     } catch (error) {
       throw error;
     }
@@ -25,4 +28,4 @@ class LoginContainer extends Component<Props> {
   }
 }
 
-export default LoginContainer;
+export default withRouter(LoginContainer);
