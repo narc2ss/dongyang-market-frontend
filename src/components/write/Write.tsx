@@ -3,37 +3,56 @@ import { Button, Input } from "style/atom";
 import styled from "styled-components";
 
 import { MainTitle } from "components/main/Main";
+import { useInputs } from "lib/hooks";
 
 const Write = () => {
+  const { inputs, onChange } = useInputs({
+    title: "",
+    price: "",
+    description: "",
+  });
+  const { title, price, description } = inputs;
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(title, price, description);
+  };
+
   return (
     <>
       <MainTitle>물건 등록</MainTitle>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <InputWrapper>
           <label>제목</label>
-          <Input type="text" />
+          <Input name="title" value={title} onChange={onChange} />
         </InputWrapper>
         <InputWrapper>
           <label>가격</label>
-          <Input type="text" />
+          <Input name="price" value={price} onChange={onChange} />
         </InputWrapper>
         <InputWrapper>
           <label>설명</label>
-          <TextArea name="" />
+          <TextArea
+            name="description"
+            value={description}
+            onChange={onChange}
+          />
         </InputWrapper>
-        <InputWrapper>
+        {/* <InputWrapper>
           <label>이미지</label>
           <Input type="file" name="" />
-        </InputWrapper>
+        </InputWrapper> */}
         <RightAligned>
-          <Button big>등록하기</Button>
+          <Button type="submit" big>
+            등록하기
+          </Button>
         </RightAligned>
       </Form>
     </>
   );
 };
 
-const Form = styled.form`
+export const Form = styled.form`
   width: 440px;
   margin: 0 auto;
 `;
@@ -50,9 +69,10 @@ export const InputWrapper = styled.div`
   label {
     flex: 1;
     text-align: right;
-    padding: 0.5rem 1rem;
+    padding: 1rem 1rem 0 0;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    line-height: 1rem;
   }
 
   & > * {
@@ -69,6 +89,7 @@ export const InputWrapper = styled.div`
 const TextArea = styled.textarea`
   height: 14rem;
   resize: none;
+  font-family: "Roboto", sans-serif;
   border: 1px solid #dbe3eb;
   border-radius: 5px;
   font-size: 1.2rem;

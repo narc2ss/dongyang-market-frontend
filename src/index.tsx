@@ -7,10 +7,13 @@ import { ThemeProvider } from "styled-components";
 import App from "./App";
 import GlobalStyle from "style/globalStyle";
 import theme from "style/theme";
+import rootStore from "store";
+
+const stores = new rootStore();
 
 ReactDOM.render(
   <Router>
-    <Provider>
+    <Provider {...stores}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App />

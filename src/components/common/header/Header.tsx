@@ -12,7 +12,7 @@ const Header = () => {
           name="search"
           placeholder="물건을 검색해보세요"
         />
-        {false ? (
+        {true ? (
           <Link to="/login">로그인</Link>
         ) : (
           <ul>
