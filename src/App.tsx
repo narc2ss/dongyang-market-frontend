@@ -1,5 +1,10 @@
-import React, { useEffect } from "react";
-import { Switch, Route, withRouter } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  Switch,
+  Route,
+  withRouter,
+  RouteComponentProps,
+} from "react-router-dom";
 import { withCookies, ReactCookieProps, useCookies } from "react-cookie";
 import { HeaderContainer, FooterContainer } from "containers/common";
 import {
@@ -12,18 +17,22 @@ import {
 } from "pages";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
+import userStore from "store/user";
 
-interface Props extends ReactCookieProps {}
+interface Props extends RouteComponentProps, ReactCookieProps {
+  userStore?: userStore;
+}
 
-function App({ cookies }: Props) {
+function App({ cookies, userStore }: Props) {
+  const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
-    try {
-      const token = cookies?.get("access_token");
-      if (token) {
-        // 재발금 or 로그인 정보 받아와서 처리
-      }
-    } catch (error) {}
-  }, []);
+    (async () => {
+      // const token = cookies?.get("access_token");
+      // console.log(token);
+      const res = await userStore?.check();
+      console.log(res);
+    })();
+  });
 
   return (
     <>
@@ -50,4 +59,4 @@ const AppWrapper = styled.article`
   padding: 1rem 0;
 `;
 
-export default withCookies(withRouter(App));
+export default inject("userStore")(observer(withCookies(withRouter(App))));

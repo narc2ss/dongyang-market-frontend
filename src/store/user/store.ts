@@ -36,9 +36,10 @@ class userStore {
 
   check = flow(function* (this: userStore) {
     try {
-      const res = yield userService.check();
-      console.log(res.data);
-    } catch (error) {}
+      return yield userService.check();
+    } catch (error) {
+      throw error;
+    }
   });
 }
 
