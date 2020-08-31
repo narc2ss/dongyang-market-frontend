@@ -12,9 +12,6 @@ interface Props {
 class MainContainer extends Component<Props> {
   private userStore = this.props.userStore as userStore;
 
-  async componentDidMount() {
-    await this.userStore.check();
-  }
   render() {
     return (
       <>

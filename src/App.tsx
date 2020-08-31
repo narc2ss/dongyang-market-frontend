@@ -1,6 +1,6 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import { withCookies, ReactCookieProps, useCookies } from "react-cookie";
 import { HeaderContainer, FooterContainer } from "containers/common";
 import {
   MainPage,
@@ -11,8 +11,20 @@ import {
   SignupPage,
 } from "pages";
 import styled from "styled-components";
+import { inject, observer } from "mobx-react";
 
-function App() {
+interface Props extends ReactCookieProps {}
+
+function App({ cookies }: Props) {
+  useEffect(() => {
+    try {
+      const token = cookies?.get("access_token");
+      if (token) {
+        // 재발금 or 로그인 정보 받아와서 처리
+      }
+    } catch (error) {}
+  }, []);
+
   return (
     <>
       <HeaderContainer />
@@ -38,4 +50,4 @@ const AppWrapper = styled.article`
   padding: 1rem 0;
 `;
 
-export default App;
+export default withCookies(withRouter(App));

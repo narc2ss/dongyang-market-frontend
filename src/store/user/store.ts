@@ -27,6 +27,8 @@ class userStore {
     try {
       const res = yield userService.login(payload);
       this.setUser(res.data);
+
+      return res.data;
     } catch (error) {
       throw error;
     }
