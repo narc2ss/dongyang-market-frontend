@@ -8,6 +8,10 @@ class userService {
   public check() {
     return client.get("/auth/check");
   }
+
+  public logout() {
+    return client.post("/auth/logout");
+  }
 }
 
 export default new userService();

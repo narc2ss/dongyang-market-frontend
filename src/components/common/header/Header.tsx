@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { UserType } from "store/user/types";
 
-const Header = () => {
+interface Props {
+  user?: UserType;
+}
+
+const Header = ({ user }: Props) => {
   return (
     <HeaderPositioner>
       <HeaderWrapper>
@@ -12,7 +17,7 @@ const Header = () => {
           name="search"
           placeholder="물건을 검색해보세요"
         />
-        {false ? (
+        {user ? (
           <ul>
             <li>
               <Link to="/write">물건등록</Link>

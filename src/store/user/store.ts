@@ -25,10 +25,9 @@ class userStore {
 
   login = flow(function* (this: userStore, payload: any) {
     try {
-      const res = yield userService.login(payload);
-      this.setUser(res.data);
-
-      return res.data;
+      const { data } = yield userService.login(payload);
+      this.setUser(data);
+      return data;
     } catch (error) {
       throw error;
     }
@@ -37,6 +36,14 @@ class userStore {
   check = flow(function* (this: userStore) {
     try {
       return yield userService.check();
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  logout = flow(function* (this: userStore) {
+    try {
+      return yield userService.logout();
     } catch (error) {
       throw error;
     }

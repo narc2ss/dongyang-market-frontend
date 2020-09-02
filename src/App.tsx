@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Switch,
   Route,
   withRouter,
   RouteComponentProps,
 } from "react-router-dom";
-import { withCookies, ReactCookieProps, useCookies } from "react-cookie";
+import { withCookies, ReactCookieProps } from "react-cookie";
 import { HeaderContainer, FooterContainer } from "containers/common";
 import {
   MainPage,
@@ -24,15 +24,17 @@ interface Props extends RouteComponentProps, ReactCookieProps {
 }
 
 function App({ cookies, userStore }: Props) {
-  const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
     (async () => {
       // const token = cookies?.get("access_token");
-      // console.log(token);
-      const res = await userStore?.check();
-      console.log(res);
+      const {
+        data: { id, nickname },
+      } = await userStore?.check();
+      console.log(id, nickname);
     })();
-  });
+  }, [userStore]);
+
+  // console.log(cookies?.get("access_token"));
 
   return (
     <>
