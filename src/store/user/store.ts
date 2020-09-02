@@ -11,7 +11,7 @@ class userStore {
   }
 
   @observable
-  private _user: UserType | undefined;
+  private _user: UserType = null;
 
   @computed
   get getUser() {
@@ -26,7 +26,8 @@ class userStore {
   login = flow(function* (this: userStore, payload: any) {
     try {
       const { data } = yield userService.login(payload);
-      this.setUser(data);
+      this.setUser(data.payload);
+      localStorage.setItem("access_token", data.token);
       return data;
     } catch (error) {
       throw error;
@@ -35,7 +36,10 @@ class userStore {
 
   check = flow(function* (this: userStore) {
     try {
-      return yield userService.check();
+      const {
+        data: { id, nickname },
+      } = yield userService.check();
+      return this.setUser({ id, nickname });
     } catch (error) {
       throw error;
     }
@@ -43,7 +47,8 @@ class userStore {
 
   logout = flow(function* (this: userStore) {
     try {
-      return yield userService.logout();
+      yield userService.logout();
+      return this.setUser(null);
     } catch (error) {
       throw error;
     }
