@@ -26,9 +26,7 @@ interface Props extends RouteComponentProps, ReactCookieProps {
 function App({ userStore }: Props) {
   useEffect(() => {
     (async () => await userStore?.check())();
-  }, []);
-
-  // console.log(cookies?.get("access_token"));
+  }, [userStore]);
 
   return (
     <>
