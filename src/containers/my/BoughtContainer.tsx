@@ -1,8 +1,14 @@
 import React from "react";
 import PostCardContainer from "containers/util/post/PostCardContainer";
+import postStore from "store/post";
+import { inject, observer } from "mobx-react";
 
-const BoughtContainer = () => {
-  return <PostCardContainer />;
+interface Props {
+  postStore: postStore;
+}
+
+const BoughtContainer = ({ postStore }: Props) => {
+  return <PostCardContainer posts={postStore.posts} />;
 };
 
-export default BoughtContainer;
+export default inject("postStore")(observer(BoughtContainer));

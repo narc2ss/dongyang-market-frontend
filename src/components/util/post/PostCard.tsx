@@ -3,19 +3,19 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import url from "static/img/sampleImg.png";
+import { setPostStatus, setComma } from "lib";
 
 interface Props {
   post: any;
 }
-
 const PostCard = ({ post }: Props) => {
   return (
-    <PostCardWrapper to="/post/3">
+    <PostCardWrapper to={`/post/${post.id}`}>
       <img src={url} alt="sample" />
       <TextWrapper>
         <h2>{post.title}</h2>
-        <h3>{post.price}원</h3>
-        <h4>{post.state}</h4>
+        <h3>{setComma(post.price)}원</h3>
+        <h4>{setPostStatus(post.status)}</h4>
         <div>
           <span>찜 80</span>
           <span>조회 323</span>

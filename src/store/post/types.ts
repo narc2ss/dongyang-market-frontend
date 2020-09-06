@@ -1,4 +1,4 @@
-export type Id = number | null;
+export type Id = string | null;
 
 export type WriteType = {
   title: string;

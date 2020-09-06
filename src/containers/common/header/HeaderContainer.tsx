@@ -9,7 +9,7 @@ interface Props {
 }
 
 const HeaderContainer = ({ userStore }: Props) => {
-  return <Header user={userStore?.getUser} />;
+  return <Header user={userStore?.user} />;
 };
 
 export default inject("userStore")(observer(HeaderContainer));

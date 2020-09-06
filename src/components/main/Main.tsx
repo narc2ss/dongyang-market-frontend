@@ -1,8 +1,13 @@
 import React from "react";
 import PostCardContainer from "containers/util/post/PostCardContainer";
 import styled from "styled-components";
+import { PostType } from "store/post/types";
 
-const Main = () => {
+interface Props {
+  posts?: PostType[];
+}
+
+const Main = ({ posts }: Props) => {
   return (
     <MainWrapper>
       <MainTitle>어서오세요 동양마켓입니다.</MainTitle>
@@ -10,8 +15,8 @@ const Main = () => {
         동양마켓은 동양미래대학교 학생들이 자유롭게 물건을 사고 팔 수 있도록
         여러가지 기능을 제공합니다. 어서 둘러보세요
       </p>
-      <SubTitle>매물</SubTitle>
-      <PostCardContainer />
+      <SubTitle>인기상품</SubTitle>
+      <PostCardContainer posts={posts} />
     </MainWrapper>
   );
 };

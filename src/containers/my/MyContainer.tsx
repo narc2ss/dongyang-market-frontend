@@ -17,7 +17,7 @@ const MyContainer = ({ userStore, history }: Props) => {
       throw error;
     }
   };
-  return <My onLogout={onLogout} />;
+  return <My onLogout={onLogout} user={userStore?.user} />;
 };
 
 export default inject("userStore")(observer(withRouter(MyContainer)));

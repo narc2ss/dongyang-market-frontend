@@ -14,7 +14,7 @@ class userStore {
   private _user: UserType = null;
 
   @computed
-  get getUser() {
+  get user() {
     return this._user;
   }
 

@@ -11,16 +11,29 @@ class postStore {
   }
 
   @observable
-  private _post: PostType = null;
+  private _post!: PostType;
+
+  @observable
+  private _posts!: PostType[];
 
   @computed
-  get getPost() {
+  get post() {
     return this._post;
+  }
+
+  @computed
+  get posts() {
+    return this._posts;
   }
 
   @action
   public setPost(payload: PostType) {
     return (this._post = payload);
+  }
+
+  @action
+  public setPosts(payload: PostType[]) {
+    return (this._posts = payload);
   }
 
   write = flow(function* (this: postStore, payload: PostType) {
@@ -33,6 +46,23 @@ class postStore {
     } catch (error) {
       throw error;
     }
+  });
+
+  getPosts = flow(function* (this: postStore) {
+    try {
+      const { data } = yield postService.posts();
+      this.setPosts(data);
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  getPost = flow(function* (this: postStore, id: string) {
+    try {
+      const { data } = yield postService.post(id);
+      console.log(data);
+      this.setPost(data);
+    } catch (error) {}
   });
 }
 

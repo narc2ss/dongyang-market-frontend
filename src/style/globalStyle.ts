@@ -25,7 +25,7 @@ const GlobalStyle = createGlobalStyle`
     display: block;
   }
   a {
-    color: #1b1f2f;
+    color: #333B43;
     font-weight: bold;
     text-decoration: none;
   }

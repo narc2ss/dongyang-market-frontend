@@ -11,6 +11,10 @@ const theme: ThemeType = {
     lavenderBlue: "#C9D5FF",
     linkWater: "#D4D5D9",
     rockBlue: "#8A97AB",
+    black: "#333B43",
+    secondary: "#2c698d",
+    test: "#C9D5FF",
+    white: "#F8F9FA",
   },
 };
 

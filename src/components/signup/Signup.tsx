@@ -17,6 +17,10 @@ const Signup = () => {
       <input type="password" />
       <label>비밀번호 확인</label>
       <input type="password" />
+      <p>
+        회원가입을 하시면 <Link to="login">개인정보 수집 정책</Link> 및{" "}
+        <Link to="login">이용약관</Link>에 동의하신것으로 간주됩니다.
+      </p>
       <button>회원가입</button>
       <br />
       <p>
