@@ -15,6 +15,7 @@ const theme: ThemeType = {
     secondary: "#2c698d",
     test: "#C9D5FF",
     white: "#F8F9FA",
+    gray: "#757575",
   },
 };
 

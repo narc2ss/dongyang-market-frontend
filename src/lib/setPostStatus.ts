@@ -1,4 +1,4 @@
-export default function (status: string): string {
+export default function (status?: string): string {
   switch (status) {
     case "0":
       return "판매중";

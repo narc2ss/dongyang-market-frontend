@@ -17,6 +17,8 @@ import {
 import { Button } from "style/atom";
 import { PostType } from "store/post/types";
 import { UserType } from "store/user/types";
+import { setPostStatus, setComma } from "lib";
+import ChatContainer from "containers/chat/ChatContainer";
 
 interface Props {
   post?: PostType;
@@ -26,28 +28,32 @@ interface Props {
 
 const Post = ({ post, user, postStore }: Props) => {
   const [isSeller] = useState(user?.id === post?.seller);
+  const [chatToggle, setChatToggle] = useState(false);
+  const onChatToggle = () => {
+    setChatToggle(!chatToggle);
+  };
   // if (!post) return <h1>loading</h1>;
   return (
     <>
       <PostContainer>
         <SpaceBetweenMiddle>
           <RowLayout>
-            <PostTitle>에어팟 프로</PostTitle>
-            <PostStatus>판매중</PostStatus>
+            <PostTitle>{post?.title}</PostTitle>
+            <PostStatus>{setPostStatus(post?.status)}</PostStatus>
           </RowLayout>
-          <PostPrice>100,000원</PostPrice>
+          <PostPrice>{setComma(post?.price)}원</PostPrice>
         </SpaceBetweenMiddle>
         <SpaceBetweenMiddle>
           <ProfileLayout>
             <img src={profile} alt="profile" />
             <div>
-              <h3>choi</h3>
+              <h3>{post?.seller}</h3>
               <div>
                 <span>조회수 323회</span>
                 <span>·</span>
                 <span>찜 80</span>
                 <span>·</span>
-                <span>3일전</span>
+                <span>{post?.createdAt}</span>
               </div>
             </div>
           </ProfileLayout>
@@ -60,30 +66,18 @@ const Post = ({ post, user, postStore }: Props) => {
           ) : (
             <PostOption>
               <Button secondary>찜하기</Button>
-              <Button secondary>채팅하기</Button>
+
+              <Button secondary onClick={onChatToggle}>
+                채팅
+              </Button>
+              {chatToggle && <ChatContainer />}
             </PostOption>
           )}
         </SpaceBetweenMiddle>
         <ImageDescriptionWrapper>
           <img src={product} alt="product" />
           <div>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit
-              nam deleniti eius beatae provident illum numquam maiores fuga
-              doloremque maxime ad accusantium, qui sapiente ipsa commodi
-              quaerat cum? Necessitatibus, eaque!Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Impedit nam deleniti eius beatae
-              provident illum numquam maiores fuga doloremque maxime ad
-              accusantium, qui sapiente ipsa commodi quaerat cum?
-              Necessitatibus, eaque!Lorem ipsum, dolor sit amet consectetur
-              adipisicing elit. Impedit nam deleniti eius beatae provident illum
-              numquam maiores fuga doloremque maxime ad accusantium, qui
-              sapiente ipsa commodi quaerat cum? Necessitatibus, eaque!Lorem
-              ipsum, dolor sit amet consectetur adipisicing elit. Impedit nam
-              deleniti eius beatae provident illum numquam maiores fuga
-              doloremque maxime ad accusantium, qui sapiente ipsa commodi
-              quaerat cum? Necessitatibus,
-            </p>
+            <p>{post?.description}</p>
           </div>
         </ImageDescriptionWrapper>
       </PostContainer>
@@ -170,7 +164,7 @@ const ImageDescriptionWrapper = styled(SpaceBetween)`
 `;
 
 const PostOption = styled.div`
-  button {
+  & > * + * {
     margin-left: 0.5rem;
   }
 `;

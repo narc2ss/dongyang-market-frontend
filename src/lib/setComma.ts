@@ -1,4 +1,4 @@
-export default function (number: number): string {
+export default function (number?: number): string {
   if (!number) return "?";
   let arr = (number + "").split("");
   if (arr.length === 3) return arr.join("");
