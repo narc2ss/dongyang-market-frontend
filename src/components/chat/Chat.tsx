@@ -1,12 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { Button } from "style/atom";
+import io from "socket.io-client";
 
-const Chat = () => {
+import { Button } from "style/atom";
+import { UserType } from "store/user/types";
+import { PostType } from "store/post/types";
+
+interface Props {
+  user: UserType;
+  post: PostType;
+}
+
+let socket: any;
+
+const Chat = ({ user, post }: Props) => {
+  // const [message, setMessage] = useState("");
+  // const [messages, setMessages] = useState([]);
+  const ENDPOINT = "localhost:4000/api";
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+
+    socket.emit("join", { name: user.id, room: post.id }, () => {});
+
+    return () => {
+      socket.emit("disconnect");
+
+      socket.off();
+    };
+  }, [ENDPOINT, post, user]);
+
   return (
     <ChatContainer>
       <ChatWrapper>
-        <ChatHeader></ChatHeader>
+        <ChatHeader>
+          <span>{post.seller}</span>
+          <span>{post.title}</span>
+        </ChatHeader>
         <ChatBody></ChatBody>
         <ChatForm action="">
           <input type="text" placeholder="메시지를 입력해주세요." />
@@ -37,7 +67,12 @@ const ChatWrapper = styled.div`
 
 const ChatHeader = styled.div`
   height: 50px;
+  padding: 0.5rem;
   background-color: ${(props) => props.theme.palette.secondary};
+
+  * {
+    color: ${(props) => props.theme.palette.white};
+  }
 `;
 
 const ChatBody = styled.div`

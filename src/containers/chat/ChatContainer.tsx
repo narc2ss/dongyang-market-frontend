@@ -1,8 +1,18 @@
 import React from "react";
 import Chat from "components/chat";
+import userStore from "store/user";
+import postStore from "store/post";
+import { useObserver, inject } from "mobx-react";
 
-const ChatContainer = () => {
-  return <Chat />;
+interface Props {
+  userStore?: userStore;
+  postStore?: postStore;
+}
+
+const ChatContainer = ({ userStore, postStore }: Props) => {
+  return useObserver(() => (
+    <Chat user={userStore!.user} post={postStore!.post} />
+  ));
 };
 
-export default ChatContainer;
+export default inject("userStore", "postStore")(ChatContainer);
