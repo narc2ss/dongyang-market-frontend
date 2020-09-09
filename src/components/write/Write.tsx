@@ -98,7 +98,7 @@ export const InputWrapper = styled.div`
   }
 `;
 
-const TextArea = styled.textarea`
+export const TextArea = styled.textarea`
   height: 14rem;
   resize: none;
   font-family: "Roboto", sans-serif;

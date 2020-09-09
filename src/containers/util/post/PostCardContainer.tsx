@@ -9,13 +9,14 @@ interface Props {
 }
 
 const PostCardContainer = ({ posts }: Props) => {
-  if (!posts) return <h1>loading</h1>;
-  return (
+  return posts ? (
     <PostWrapper>
       {posts.map((post) => {
         return <PostCard key={post.id} post={post} />;
       })}
     </PostWrapper>
+  ) : (
+    <div></div>
   );
 };
 

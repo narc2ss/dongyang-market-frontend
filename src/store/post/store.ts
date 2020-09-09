@@ -14,7 +14,7 @@ class postStore {
   private _post: PostType = {};
 
   @observable
-  private _posts!: PostType[];
+  private _posts: PostType[] = [];
 
   @computed
   get post() {
@@ -26,10 +26,10 @@ class postStore {
     return this._posts;
   }
 
-  // @action
-  // public setPost(payload: PostType) {
-  //   this._post = payload;
-  // }
+  @action
+  public setPost(payload: PostType) {
+    this._post = payload;
+  }
 
   @action
   public setPosts(payload: PostType[]) {
@@ -60,7 +60,7 @@ class postStore {
   getPost = flow(function* (this: postStore, id: string) {
     try {
       const { data } = yield postService.post(id);
-      this._post = data;
+      this.setPost(data);
     } catch (error) {}
   });
 }

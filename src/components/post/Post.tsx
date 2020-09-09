@@ -56,7 +56,7 @@ const Post = ({ post, user }: Props) => {
 
           {user.id === post.seller ? (
             <PostOption>
-              <Link to="/write/3">수정</Link>
+              <Link to={`/write/${post.id}`}>수정</Link>
               <Button link>삭제</Button>
             </PostOption>
           ) : (
