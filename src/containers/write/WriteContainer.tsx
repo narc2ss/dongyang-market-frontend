@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { inject, observer } from "mobx-react";
 
 import { Write } from "components/write";
-import { Id, WriteType } from "store/post/types";
+import { WriteType } from "store/post/types";
 import postStore from "store/post";
 import userStore from "store/user";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -13,23 +13,15 @@ interface Props extends RouteComponentProps {
 }
 
 const WriteContainer = ({ postStore, userStore, history }: Props) => {
-  const [seller, setSeller] = useState<Id>(null);
-  useEffect(() => {
-    (async () => setSeller(await userStore?.check()))();
-  }, [userStore]);
   const onWrite = async (payload: WriteType) => {
     try {
-      const { status, id } = await postStore!.write({ ...payload, seller });
+      const { status, id } = await postStore!.write({ ...payload });
       if (status === 201) history.push(`/post/${id}`);
     } catch (error) {
       throw error;
     }
   };
-  return (
-    <>
-      <Write onWrite={onWrite} />
-    </>
-  );
+  return <Write onWrite={onWrite} user={userStore!.user} />;
 };
 
 export default inject(

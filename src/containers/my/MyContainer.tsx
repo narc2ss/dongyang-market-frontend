@@ -1,6 +1,6 @@
 import React from "react";
 import My from "components/my/My";
-import { inject, observer } from "mobx-react";
+import { inject, useObserver } from "mobx-react";
 import userStore from "store/user";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const MyContainer = ({ userStore, history }: Props) => {
       throw error;
     }
   };
-  return <My onLogout={onLogout} user={userStore?.user} />;
+  return useObserver(() => <My onLogout={onLogout} user={userStore?.user} />);
 };
 
-export default inject("userStore")(observer(withRouter(MyContainer)));
+export default inject("userStore")(withRouter(MyContainer));

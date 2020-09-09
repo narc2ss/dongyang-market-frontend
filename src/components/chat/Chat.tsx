@@ -7,62 +7,7 @@ const Chat = () => {
     <ChatContainer>
       <ChatWrapper>
         <ChatHeader></ChatHeader>
-        <ChatBody>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-          <h1>helo</h1>
-        </ChatBody>
+        <ChatBody></ChatBody>
         <ChatForm action="">
           <input type="text" placeholder="메시지를 입력해주세요." />
           <Button>보내기</Button>

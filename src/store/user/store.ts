@@ -11,7 +11,7 @@ class userStore {
   }
 
   @observable
-  private _user: UserType = null;
+  private _user: UserType = {};
 
   @computed
   get user() {
@@ -49,7 +49,7 @@ class userStore {
   logout = flow(function* (this: userStore) {
     try {
       yield userService.logout();
-      return this.setUser(null);
+      return this.setUser({});
     } catch (error) {
       throw error;
     }

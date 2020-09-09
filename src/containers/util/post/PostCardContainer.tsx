@@ -13,7 +13,7 @@ const PostCardContainer = ({ posts }: Props) => {
   return (
     <PostWrapper>
       {posts.map((post) => {
-        return <PostCard key={post?.id} post={post} />;
+        return <PostCard key={post.id} post={post} />;
       })}
     </PostWrapper>
   );

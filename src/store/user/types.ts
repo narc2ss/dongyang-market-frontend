@@ -1,4 +1,4 @@
-export type UserType = null | {
-  id: number;
-  nickname: string;
+export type UserType = {
+  id?: number;
+  nickname?: string;
 };

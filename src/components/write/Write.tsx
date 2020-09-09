@@ -5,12 +5,14 @@ import styled from "styled-components";
 import { MainTitle } from "components/main/Main";
 import { useInputs } from "lib/hooks";
 import { WriteType } from "store/post/types";
+import { UserType } from "store/user/types";
 
 interface Props {
   onWrite: (payload: WriteType) => void;
+  user: UserType;
 }
 
-const Write = ({ onWrite }: Props) => {
+const Write = ({ onWrite, user }: Props) => {
   const { inputs, onChange } = useInputs({
     title: "",
     price: "",
@@ -20,7 +22,12 @@ const Write = ({ onWrite }: Props) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onWrite({ title, price: parseInt(price, 10), description });
+    onWrite({
+      seller: user.id!,
+      title,
+      price: parseInt(price, 10),
+      description,
+    });
   };
 
   return (

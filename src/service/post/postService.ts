@@ -1,8 +1,8 @@
 import client from "lib/client";
-import { PostType } from "store/post/types";
+import { WriteType } from "store/post/types";
 
 class postService {
-  public write(payload: PostType) {
+  public write(payload: WriteType) {
     return client.post("/post", payload);
   }
 

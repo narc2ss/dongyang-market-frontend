@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { inject, observer } from "mobx-react";
 
 import profile from "static/img/user_42.png";
 import product from "static/img/product.png";
-import PostCardContainer from "containers/util/post/PostCardContainer";
-import postStore from "store/post";
 import { SubTitle } from "components/main/Main";
 import {
   SpaceBetween,
@@ -21,44 +18,43 @@ import { setPostStatus, setComma } from "lib";
 import ChatContainer from "containers/chat/ChatContainer";
 
 interface Props {
-  post?: PostType;
-  postStore?: postStore;
-  user?: UserType;
+  post: PostType;
+  user: UserType;
 }
 
-const Post = ({ post, user, postStore }: Props) => {
-  const [isSeller] = useState(user?.id === post?.seller);
+const Post = ({ post, user }: Props) => {
   const [chatToggle, setChatToggle] = useState(false);
+
   const onChatToggle = () => {
     setChatToggle(!chatToggle);
   };
-  // if (!post) return <h1>loading</h1>;
+
   return (
     <>
       <PostContainer>
         <SpaceBetweenMiddle>
           <RowLayout>
-            <PostTitle>{post?.title}</PostTitle>
-            <PostStatus>{setPostStatus(post?.status)}</PostStatus>
+            <PostTitle>{post.title}</PostTitle>
+            <PostStatus>{setPostStatus(post.status)}</PostStatus>
           </RowLayout>
-          <PostPrice>{setComma(post?.price)}원</PostPrice>
+          <PostPrice>{setComma(post.price)}원</PostPrice>
         </SpaceBetweenMiddle>
         <SpaceBetweenMiddle>
           <ProfileLayout>
             <img src={profile} alt="profile" />
             <div>
-              <h3>{post?.seller}</h3>
+              <h3>{post.seller}</h3>
               <div>
                 <span>조회수 323회</span>
                 <span>·</span>
                 <span>찜 80</span>
                 <span>·</span>
-                <span>{post?.createdAt}</span>
+                <span>{post.createdAt}</span>
               </div>
             </div>
           </ProfileLayout>
 
-          {isSeller ? (
+          {user.id === post.seller ? (
             <PostOption>
               <Link to="/write/3">수정</Link>
               <Button link>삭제</Button>
@@ -77,12 +73,11 @@ const Post = ({ post, user, postStore }: Props) => {
         <ImageDescriptionWrapper>
           <img src={product} alt="product" />
           <div>
-            <p>{post?.description}</p>
+            <p>{post.description}</p>
           </div>
         </ImageDescriptionWrapper>
       </PostContainer>
       <SubTitle>다른제품</SubTitle>
-      <PostCardContainer posts={postStore?.posts} />
     </>
   );
 };
@@ -169,4 +164,4 @@ const PostOption = styled.div`
   }
 `;
 
-export default inject("postStore")(observer(Post));
+export default Post;

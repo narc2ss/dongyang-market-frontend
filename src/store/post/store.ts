@@ -1,7 +1,7 @@
 import rootStore from "store";
 import { observable, computed, action, flow } from "mobx";
 
-import { PostType } from "./types";
+import { PostType, WriteType } from "./types";
 import postService from "service/post/postService";
 
 class postStore {
@@ -11,7 +11,7 @@ class postStore {
   }
 
   @observable
-  private _post!: PostType;
+  private _post: PostType = {};
 
   @observable
   private _posts!: PostType[];
@@ -26,17 +26,17 @@ class postStore {
     return this._posts;
   }
 
-  @action
-  public setPost(payload: PostType) {
-    return (this._post = payload);
-  }
+  // @action
+  // public setPost(payload: PostType) {
+  //   this._post = payload;
+  // }
 
   @action
   public setPosts(payload: PostType[]) {
     return (this._posts = payload);
   }
 
-  write = flow(function* (this: postStore, payload: PostType) {
+  write = flow(function* (this: postStore, payload: WriteType) {
     try {
       const {
         status,
@@ -60,8 +60,7 @@ class postStore {
   getPost = flow(function* (this: postStore, id: string) {
     try {
       const { data } = yield postService.post(id);
-      console.log(data);
-      this.setPost(data);
+      this._post = data;
     } catch (error) {}
   });
 }

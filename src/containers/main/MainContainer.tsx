@@ -12,7 +12,7 @@ const MainContainer = ({ postStore }: Props) => {
   useEffect(() => {
     (async () => await postStore?.getPosts())();
   }, [postStore]);
-  return <Main posts={postStore?.posts} />;
+  return <Main posts={postStore!.posts} />;
 };
 
 export default inject("postStore")(observer(MainContainer));

@@ -17,7 +17,7 @@ const Header = ({ user }: Props) => {
           name="search"
           placeholder="물건을 검색해보세요"
         />
-        {user ? (
+        {user!.id ? (
           <ul>
             <li>
               <Link to="/write">물건등록</Link>
