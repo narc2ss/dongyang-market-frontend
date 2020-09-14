@@ -66,7 +66,7 @@ const Write = ({ onWrite, user }: Props) => {
 
 export const Form = styled.form`
   width: 440px;
-  margin: 0 auto;
+  margin: 60px auto;
 `;
 
 export const RightAligned = styled.div`
