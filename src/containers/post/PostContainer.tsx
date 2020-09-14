@@ -14,14 +14,24 @@ interface MatchParams {
   id: string;
 }
 
-const PostContainer = ({ postStore, userStore, match }: Props) => {
+const PostContainer = ({ postStore, userStore, match, history }: Props) => {
   useEffect(() => {
     const { id } = match.params;
     (async () => await postStore?.getPost(id))();
   }, [postStore, match.params]);
 
+  const onRemove = async (id: number) => {
+    try {
+      await postStore?.remove(id);
+      alert("게시글이 삭제되었습니다.");
+      history.push("/");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return useObserver(() => (
-    <Post post={postStore!.post} user={userStore!.user} />
+    <Post post={postStore!.post} user={userStore!.user} onRemove={onRemove} />
   ));
 };
 

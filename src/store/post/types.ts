@@ -1,14 +1,25 @@
-import { SpawnSyncOptionsWithBufferEncoding } from "child_process";
+type PostUserType = {
+  id?: number;
+  nickname?: string;
+};
 
 export type PostType = {
+  // id?: number;
+  // seller?: number;
+  // title?: string;
+  // price?: number;
+  // description?: string;
+  // status?: string;
+  // createdAt?: string;
+  // updatedAt?: string;
   id?: number;
-  seller?: number;
   title?: string;
   price?: number;
   description?: string;
   status?: string;
   createdAt?: string;
   updatedAt?: string;
+  User?: PostUserType;
 };
 
 export type WriteType = {
@@ -25,4 +36,8 @@ export type EditType = {
   price: number;
   status: string;
   description: string;
+};
+
+export type RemoveType = {
+  id: number;
 };

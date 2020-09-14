@@ -13,14 +13,20 @@ interface MatchParams {
   id: string;
 }
 
-const EditContainer = ({ postStore, match }: Props) => {
+const EditContainer = ({ postStore, match, history }: Props) => {
+  const { id } = match.params;
   useEffect(() => {
-    const { id } = match.params;
     (async () => await postStore?.getPost(id))();
-  }, [postStore, match.params]);
+  }, [postStore, id]);
 
-  const onEdit = (payload: EditType) => {
-    console.log(payload);
+  const onEdit = async (payload: EditType) => {
+    try {
+      await postStore.edit(payload);
+      alert("게시글이 수정되었습니다.");
+      history.push(`/post/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return useObserver(() => <Edit post={postStore.post} onEdit={onEdit} />);
 };

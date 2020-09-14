@@ -5,3 +5,4 @@ export { default as LoginPage } from "./login/LoginPage";
 export { default as SignupPage } from "./signup/SignupPage";
 export { default as PostPage } from "./post/PostPage";
 export { default as ChatPage } from "./chat/ChatPage";
+export { default as SearchPage } from "./search/SearchPage";

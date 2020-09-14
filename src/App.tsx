@@ -15,6 +15,7 @@ import {
   LoginPage,
   SignupPage,
   ChatPage,
+  SearchPage,
 } from "pages";
 import styled from "styled-components";
 import { inject, observer } from "mobx-react";
@@ -37,8 +38,9 @@ function App({ userStore }: Props) {
         <Switch>
           <Route exact path="/" component={MainPage} />
           <Route path="/post/:id" component={PostPage} />
+          <Route path="/search/:keyword" component={SearchPage} />
           <Route path="/write" component={WritePage} />
-          <Route path={`/chat/:id`} component={ChatPage} />
+          <Route path="/chat/:id" component={ChatPage} />
           <Route path="/my" component={MyPage} />
           <Route path="/login" component={LoginPage} />
           <Route path="/signup" component={SignupPage} />

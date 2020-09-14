@@ -1,7 +1,7 @@
 import rootStore from "store";
 import { observable, computed, action, flow } from "mobx";
 
-import { PostType, WriteType } from "./types";
+import { PostType, WriteType, EditType } from "./types";
 import postService from "service/post/postService";
 
 class postStore {
@@ -11,10 +11,15 @@ class postStore {
   }
 
   @observable
-  private _post: PostType = {};
+  private _post: PostType = {
+    User: {},
+  };
 
   @observable
   private _posts: PostType[] = [];
+
+  @observable
+  private _searchPosts: PostType[] = [];
 
   @computed
   get post() {
@@ -26,6 +31,11 @@ class postStore {
     return this._posts;
   }
 
+  @computed
+  get searchPosts() {
+    return this._searchPosts;
+  }
+
   @action
   public setPost(payload: PostType) {
     this._post = payload;
@@ -35,6 +45,39 @@ class postStore {
   public setPosts(payload: PostType[]) {
     return (this._posts = payload);
   }
+
+  @action
+  public setSearchPosts(payload: PostType[]) {
+    return (this._searchPosts = payload);
+  }
+
+  getPosts = flow(function* (this: postStore) {
+    try {
+      const { data } = yield postService.posts();
+      console.log(data);
+      this.setPosts(data);
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  getPost = flow(function* (this: postStore, id: string) {
+    try {
+      const { data } = yield postService.post(id);
+      this.setPost(data);
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  getSearchPosts = flow(function* (this: postStore, keyword: string) {
+    try {
+      const { data } = yield postService.searchPosts(keyword);
+      this.setSearchPosts(data);
+    } catch (error) {
+      throw error;
+    }
+  });
 
   write = flow(function* (this: postStore, payload: WriteType) {
     try {
@@ -48,20 +91,20 @@ class postStore {
     }
   });
 
-  getPosts = flow(function* (this: postStore) {
+  edit = flow(function* (this: postStore, payload: EditType) {
     try {
-      const { data } = yield postService.posts();
-      this.setPosts(data);
+      yield postService.edit(payload);
     } catch (error) {
       throw error;
     }
   });
 
-  getPost = flow(function* (this: postStore, id: string) {
+  remove = flow(function* (this: postStore, id: number) {
     try {
-      const { data } = yield postService.post(id);
-      this.setPost(data);
-    } catch (error) {}
+      yield postService.remove(id);
+    } catch (error) {
+      throw error;
+    }
   });
 }
 

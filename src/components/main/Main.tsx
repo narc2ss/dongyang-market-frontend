@@ -25,7 +25,7 @@ export const MainTitle = styled.h2`
   font-size: 2.5rem;
   font-weight: bold;
   color: #333b43;
-  margin: 60px 0;
+  margin-top: 60px;
   text-align: center;
 `;
 
@@ -43,7 +43,7 @@ const MainWrapper = styled.section`
     line-height: 19px;
     text-align: center;
     color: #4f565e;
-    margin: 80px 0;
+    margin-top: 80px;
   }
 `;
 
@@ -51,6 +51,7 @@ export const SubTitle = styled.h5`
   font-size: 2rem;
   text-align: center;
   margin-bottom: 40px;
+  margin-top: 60px;
 `;
 
 export default Main;

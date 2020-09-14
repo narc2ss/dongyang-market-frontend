@@ -20,9 +20,10 @@ import ChatContainer from "containers/chat/ChatContainer";
 interface Props {
   post: PostType;
   user: UserType;
+  onRemove: (id: number) => void;
 }
 
-const Post = ({ post, user }: Props) => {
+const Post = ({ post, user, onRemove }: Props) => {
   const [chatToggle, setChatToggle] = useState(false);
 
   const onChatToggle = () => {
@@ -43,7 +44,7 @@ const Post = ({ post, user }: Props) => {
           <ProfileLayout>
             <img src={profile} alt="profile" />
             <div>
-              <h3>{post.seller}</h3>
+              <h3>{post.User!.nickname!}</h3>
               <div>
                 <span>조회수 323회</span>
                 <span>·</span>
@@ -54,10 +55,12 @@ const Post = ({ post, user }: Props) => {
             </div>
           </ProfileLayout>
 
-          {user.id === post.seller ? (
+          {user.id === post.User!.id ? (
             <PostOption>
               <Link to={`/write/${post.id}`}>수정</Link>
-              <Button link>삭제</Button>
+              <Button link onClick={() => onRemove(post.id!)}>
+                삭제
+              </Button>
             </PostOption>
           ) : (
             <PostOption>

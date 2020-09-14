@@ -34,7 +34,7 @@ const Chat = ({ user, post }: Props) => {
     <ChatContainer>
       <ChatWrapper>
         <ChatHeader>
-          <span>{post.seller}</span>
+          <span>{post.User!.nickname}</span>
           <span>{post.title}</span>
         </ChatHeader>
         <ChatBody></ChatBody>

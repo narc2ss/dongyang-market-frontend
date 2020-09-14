@@ -1,22 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { UserType } from "store/user/types";
 
 interface Props {
   user?: UserType;
+  onSearch: (keyword: string) => void;
 }
 
-const Header = ({ user }: Props) => {
+const Header = ({ user, onSearch }: Props) => {
+  const [keyword, setKeyword] = useState("");
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    onSearch(keyword);
+    setKeyword("");
+  };
+
   return (
     <HeaderPositioner>
       <HeaderWrapper>
         <Logo to="/">동양마켓</Logo>
-        <SearchBar
-          type="search"
-          name="search"
-          placeholder="물건을 검색해보세요"
-        />
+        <form onSubmit={onSubmit}>
+          <SearchBar
+            type="search"
+            name="search"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="물건을 검색해보세요"
+          />
+        </form>
         {user!.id ? (
           <ul>
             <li>
