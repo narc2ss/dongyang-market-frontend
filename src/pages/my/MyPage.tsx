@@ -9,6 +9,7 @@ import {
 } from "containers/my";
 import styled from "styled-components";
 import { SpaceBetween } from "style/layout";
+import SellContainer from "containers/my/SellContainer";
 
 const MyPage = () => {
   return (
@@ -27,7 +28,7 @@ const MyPage = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/my/write" activeClassName="active">
+            <NavLink to="/my/sell" activeClassName="active">
               나의 판매상품
             </NavLink>
           </li>
@@ -40,7 +41,7 @@ const MyPage = () => {
         <Switch>
           <Route exact path="/my" component={ChatContainer} />
           <Route path="/my/like" component={LikeContainer} />
-          <Route path="/my/write" component={WriteContainer} />
+          <Route path="/my/sell" component={SellContainer} />
           <Route path="/my/bought" component={BoughtContainer} />
         </Switch>
       </ContainerWrapper>

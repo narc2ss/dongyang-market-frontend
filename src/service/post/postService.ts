@@ -10,6 +10,10 @@ class postService {
     return client.get("/posts");
   }
 
+  public getSellList(id: number) {
+    return client.get(`/posts/sell/${id}`);
+  }
+
   public searchPosts(keyword: string) {
     return client.get(`/posts/${keyword}`);
   }

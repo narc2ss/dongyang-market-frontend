@@ -21,6 +21,9 @@ class postStore {
   @observable
   private _searchPosts: PostType[] = [];
 
+  @observable
+  private _sellList: PostType[] = [];
+
   @computed
   get post() {
     return this._post;
@@ -34,6 +37,11 @@ class postStore {
   @computed
   get searchPosts() {
     return this._searchPosts;
+  }
+
+  @computed
+  get sellList() {
+    return this._sellList;
   }
 
   @action
@@ -51,11 +59,24 @@ class postStore {
     return (this._searchPosts = payload);
   }
 
+  @action
+  public setSellList(payload: PostType[]) {
+    return (this._sellList = payload);
+  }
+
   getPosts = flow(function* (this: postStore) {
     try {
       const { data } = yield postService.posts();
-      console.log(data);
       this.setPosts(data);
+    } catch (error) {
+      throw error;
+    }
+  });
+
+  getSellList = flow(function* (this: postStore, id: number) {
+    try {
+      const { data } = yield postService.getSellList(id);
+      this.setSellList(data);
     } catch (error) {
       throw error;
     }
