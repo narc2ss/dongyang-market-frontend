@@ -12,7 +12,7 @@ const Button = styled.button<ButtonType>`
   background-color: ${(props) => props.theme.palette.secondary};
   color: ${(props) => props.theme.palette.white};
   border: 1px solid ${(props) => props.theme.palette.secondary};
-  /* border-radius: 7px; */
+  border-radius: 7px;
   cursor: pointer;
 
   outline: none;
