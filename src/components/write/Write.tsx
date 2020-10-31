@@ -74,13 +74,25 @@ export const RightAligned = styled.div`
   justify-content: flex-end;
 `;
 
+export const CenterAligned = styled.div`
+  display: flex;
+  justify-content: center;
+  & > * {
+    margin-bottom: 1rem;
+  }
+  & > *:not(label) {
+    flex: 6;
+    font-size: 1rem;
+  }
+`;
+
 export const InputWrapper = styled.div`
   display: flex;
-  align-items: flex-start;
-
+  justify-content: center;
+  flex-direction: column;
   label {
     flex: 1;
-    text-align: right;
+    text-align: left;
     padding: 1rem 1rem 0 0;
     font-weight: 700;
     font-size: 1rem;
@@ -88,7 +100,7 @@ export const InputWrapper = styled.div`
   }
 
   & > * {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
   & > *:not(label) {
     flex: 6;
